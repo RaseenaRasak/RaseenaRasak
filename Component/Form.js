@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { SafeAreaView, TextInput, Text, Button, Alert } from "react-native";
 import { useState } from "react";
 import axios, { Axios } from "axios";
@@ -77,7 +77,10 @@ export default function Form() {
                 error.email ? <Text style={styles.errorText}>{error.email}</Text> : null
             }
 
+            <View style={{padding: 50}}>
             <Button title="Submit" color={"green"} onPress={() => { handlesubmit(); CreateCustomer(); }} />
+            </View>
+            
         </SafeAreaView>
     )
 

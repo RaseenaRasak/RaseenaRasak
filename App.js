@@ -176,11 +176,13 @@
 
 import { View } from "react-native";
 import Form from "./Component/Form";
+import Form2 from "./Component/Form2";
 
 export default function App() {
   return (
     <View>
       <Form />
+      {/* <Form2/> */}
     </View>
   )
 }
