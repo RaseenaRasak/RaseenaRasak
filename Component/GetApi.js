@@ -9,7 +9,6 @@ import Carousel, { Pagination } from 'react-native-snap-carousel';
 import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry";
 import { ActivityIndicator } from "react-native-paper";
 
-// const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
 export default function App() {
 
@@ -53,16 +52,15 @@ export default function App() {
 
   const renderProduct = ({ item }) => {
     return (
-      <View >
-        <Text>
+    
+       
           <View style={styles.card}>
           {item.image_url && <Image source={{ uri: item.image_url }} style={styles.imageurl} />}
           {item.product_name && <Text style={styles.title}>{item.product_name}</Text>}
           {item.cost && <Text style={styles.description}>Cost : $ {item.cost}</Text>}
           </View>
   
-        </Text>
-      </View>
+     
 
     );
   };
@@ -129,25 +127,6 @@ export default function App() {
 
         <View style={styles.bannerContainer}>
 
-          {/* <Carousel
-            data={data}
-            renderItem={({ item }) => (
-              <View style={styles.item}>
-                <Image source={item.image} style={styles.image} />
-              </View>
-            )}
-            sliderWidth={screenWidth} // Set the slider width to match the screen width
-            itemWidth={screenWidth}   // Set the item width to match the screen width
-            autoplay={true}           // Enable autoplay
-            autoplayInterval={3000}
-            onSnapToItem={(index) => setActiveSlide(index)} // Add this callback to track the active slide
-          /> */}
-          {/* 
-          <Pagination
-            dotsLength={data.length} // Specify the number of dots (should match the number of items in your data array)
-            containerStyle={styles.paginationContainer} // Add your custom styles here
-            dotStyle={styles.paginationDot} // Add your custom dot styles here
-          /> */}
         </View>
 
         <FlatList
