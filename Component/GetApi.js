@@ -15,6 +15,7 @@ export default function App() {
   const [data, setdata] = useState([])
   const [offset, setOffset] = useState(0);
   const [loadingMore, setLoadingMore] = useState(false);
+  
 
   const renderLoader = () => {
     return (
