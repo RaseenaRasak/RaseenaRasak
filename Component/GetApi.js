@@ -24,10 +24,24 @@ export default function App() {
     );
   };
 
+  const getAPI = () => {
+    axios
+      .get(`http://139.59.66.191:3016/viewProducts?offset=${offset}&limit=4`)
+      .then(res => {
+        // console.log(res.data);
+        const newData = res.data.data;
+        setdata(prevData => [...prevData, ...newData]);
+      })
+      .catch(err => console.log(err))
+      .finally(() => {
+        setLoadingMore(false);
+      });
+  }
+
   const loadMoreItem = () => {
     if (loadingMore) return;
     setLoadingMore(true);
-    setOffset(offset + 1);
+    setOffset(prevOffset => prevOffset + 1);
   };
 
   useEffect(() => {
@@ -37,31 +51,17 @@ export default function App() {
   }, [offset, loadingMore]);
 
 
-  const getAPI = () => {
-    axios
-      .get(`http://139.59.66.191:3016/viewProducts?offset=${offset}&limit=4`)
-      .then(res => {
-        // console.log(res.data);
-        setdata(res.data.data)
-      })
-      .catch(err => console.log(err))
-      .finally(() => {
-        setLoadingMore(false);
-      });
-  }
-
   const renderProduct = ({ item }) => {
     return (
-    
-       
-          <View style={styles.card}>
-          {item.image_url && <Image source={{ uri: item.image_url }} style={styles.imageurl} />}
-          {item.product_name && <Text style={styles.title}>{item.product_name}</Text>}
-          {item.cost && <Text style={styles.description}>Cost : $ {item.cost}</Text>}
-          </View>
-  
-     
+      <View style={styles.card}>
+        {item.image_url && <Image source={{ uri: item.image_url }} style={styles.imageurl} />}
+        {item.product_name && <Text style={styles.title}>{item.product_name}</Text>}
 
+        <View style={styles.descriptionContainer}>
+        {item.cost.toString() && <Text style={styles.description}>Cost : $ {item.cost.toString()}</Text>}
+        </View>
+       
+      </View>
     );
   };
 
@@ -179,21 +179,31 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+    width: '100%',
+    height: 300, // Set a fixed height for the card
+    overflow: 'hidden', // Ensure content inside the card doesn't overflow
   },
   imageurl: {
     width: '100%',
-    height: 200,
-    borderRadius: 10,
-    marginBottom: 10,
+    height: '70%',
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    marginBottom: 5,
+    resizeMode: 'cover', // Ensure the image covers the entire area
   },
   title: {
-    fontSize: 18,
+    fontSize: 10,
     fontWeight: 'bold',
     marginBottom: 5,
   },
-  description: {
-    fontSize: 16,
+  descriptionContainer: {
+    maxHeight: 50, // Set maximum height for the description container
+    overflow: 'hidden', // Hide overflowed content
   },
+  description: {
+    fontSize: 15,
+  },
+  
   container: {
     flex: 1,
     padding: 10,
