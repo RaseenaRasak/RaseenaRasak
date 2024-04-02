@@ -16,7 +16,6 @@ export default function App() {
   const [offset, setOffset] = useState(0);
   const [loadingMore, setLoadingMore] = useState(false);
   
-
   const renderLoader = () => {
     return (
       <View style={styles.loaderStyle}>
